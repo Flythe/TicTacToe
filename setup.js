@@ -38,41 +38,36 @@ function addButtons() {
 function addBots() {
 	const container = createDiv().class('button-container')
 
-	addSelect('1', pickBotA, container)
-	addSelect('2', pickBotB, container)
+	addSelect('1', container)
+	addSelect('2', container)
 }
 
-function addSelect(player, callback, container) {
+function addSelect(player, container) {
 	createSpan(`Player ${player}:`).parent(container)
 
-	let innerSel = createSelect().parent(container)
+	let innerSel = createSelect().class(`player${player}`).parent(container)
   	
-  	addSelectOptions(innerSel)
-
-  	innerSel.changed(callback)
-
-  	return innerSel
-}
-
-function addSelectOptions(innerSel) {
-	innerSel.option('Human')
+  	innerSel.option('Human')
   	innerSel.option('Sequential')
   	innerSel.option('Random')
+
+  	innerSel.changed(pickBot)
+
+  	return innerSel
 }
 
 /**
  * Handler for the player selection dropdown
  */
-function pickBotA() {
+function pickBot() {
+	const elName = this.elt.className
 	const bot = this.value()
 
-	gameBoard.changePlayerA(bot)
-}
-
-function pickBotB() {
-	const bot = this.value()
-
-	gameBoard.changePlayerB(bot)
+	if (elName === 'player1') {
+		gameBoard.changePlayerA(bot)
+	} else {
+		gameBoard.changePlayerB(bot)
+	}
 }
 
 /**
@@ -91,14 +86,10 @@ function resetGame() {
 }
 
 function autoGame() {
-	let i = 0
-
-	while (i < 100) {
+	do {
 		gameBoard.resetGame()
 		gameBoard.startAutoGame()
-
-		i++
-	}
+	} while (gameBoard.getResults().games % 100 > 0)
 
 	console.log(gameBoard.getResults())
 }
