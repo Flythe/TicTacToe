@@ -39,6 +39,10 @@ class Gameboard {
 	}
 
 	boardClick() {
+		if (!this.botPlayerA.isHuman() && !this.botPlayerB.isHuman()) {
+			return
+		}
+
 		if (this.gameState.gameHasEnded()) {
 			this.resetGame()
 

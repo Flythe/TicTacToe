@@ -1,5 +1,5 @@
 class GameState {
-	gameBoard = []
+	gameState = []
 
 	player = 1
 	round = 0
@@ -17,7 +17,7 @@ class GameState {
 		const emptyArray = Array(this.size).fill(0)
 		const emptyGrid = Array.from({length: this.size}, _ => emptyArray.slice())
 
-		this.gameBoard = emptyGrid
+		this.gameState = emptyGrid
 	}
 
 	reset() {
@@ -30,8 +30,12 @@ class GameState {
 		this.clearErrors()
 	}
 
+	getState() {
+		return this.gameState
+	}
+
 	progress(x, y) {
-		this.gameBoard[y][x] = this.player
+		this.gameState[y][x] = this.player
 
 		this.playerHasWon()
 
@@ -50,7 +54,7 @@ class GameState {
 	}
 
 	checkWin() {
-		const rows = this.checkArrays(this.gameBoard)
+		const rows = this.checkArrays(this.gameState)
 		const cols = this.checkArrays(this.getGridCols())
 		const diag = this.checkArrays(this.getGridDiagonals())
 
@@ -68,8 +72,8 @@ class GameState {
 	}
 
 	getGridCols() {
-		return this.gameBoard.map((val, idx) => {
-			return this.gameBoard.map((val) => val[idx])
+		return this.gameState.map((val, idx) => {
+			return this.gameState.map((val) => val[idx])
 		})
 	}
 
@@ -83,13 +87,13 @@ class GameState {
 	}
 
 	getGridDiagonal(diagonal) {
-		return this.gameBoard.map((val, idx) => {
+		return this.gameState.map((val, idx) => {
 			return val[diagonal[idx]]
 		})
 	}
 
 	isValidMove(x, y) {
-		const blockValue = this.gameBoard[y][x]
+		const blockValue = this.gameState[y][x]
 		
 		if (blockValue !== 0) {
 			this.error = true
