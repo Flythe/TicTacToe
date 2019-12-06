@@ -15,7 +15,7 @@ class GamePiece {
 	 * @param y: column index of the clicked grid square
 	 */
 	place(x, y) {
-		if (this.gameState.gameOver) {
+		if (this.gameState.gameHasEnded()) {
 			return
 		}
 

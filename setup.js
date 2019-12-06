@@ -6,8 +6,6 @@ const boardBackground = 'white'
 // Instance of the game
 let gameBoard = new Gameboard(boardSize, boardBackground, boardBlocks)
 
-let sel, button, buttonContainer
-
 /**
  * Create the canvas and navigation
  */
@@ -15,8 +13,8 @@ function setup() {
 	let cnv = createCanvas(boardSize, boardSize).parent('container')
 	cnv.mousePressed(boardClick)
 
-	addButtons()
 	addBots()
+	addButtons()
 
 	gameBoard.resetGame()
 }
@@ -25,34 +23,56 @@ function setup() {
  * Create the game buttons
  */
 function addButtons() {
-	buttonContainer = createDiv().class('button-container')
-	button = createButton('Reset').parent(buttonContainer)
-  	
-  	button.mousePressed(resetGame)
+	const buttonContainer = createDiv().class('button-container')
+	
+	let resetBtn = createButton('Reset').parent(buttonContainer)
+  	resetBtn.mousePressed(resetGame)
+
+  	let startBtn = createButton('Start').parent(buttonContainer)
+  	startBtn.mousePressed(autoGame)
 }
 
 /**
  * Add a dropdown with the possible players
  */
 function addBots() {
-	createSpan('Player:').parent(buttonContainer)
+	const container = createDiv().class('button-container')
 
-	sel = createSelect().parent(buttonContainer)
+	addSelect('A', pickBotA, container)
+	addSelect('B', pickBotB, container)
+}
+
+function addSelect(player, callback, container) {
+	createSpan(`Player ${player}:`).parent(container)
+
+	let innerSel = createSelect().parent(container)
   	
-  	sel.option('Human')
-  	sel.option('Sequential')
-  	sel.option('Random')
+  	addSelectOptions(innerSel)
 
-  	sel.changed(pickBot)
+  	innerSel.changed(callback)
+
+  	return innerSel
+}
+
+function addSelectOptions(innerSel) {
+	innerSel.option('Human')
+  	innerSel.option('Sequential')
+  	innerSel.option('Random')
 }
 
 /**
  * Handler for the player selection dropdown
  */
-function pickBot() {
-	const bot = sel.value()
+function pickBotA() {
+	const bot = this.value()
 
-	gameBoard.changeBotPlayer(bot)
+	gameBoard.changePlayerA(bot)
+}
+
+function pickBotB() {
+	const bot = this.value()
+
+	gameBoard.changePlayerB(bot)
 }
 
 /**
@@ -67,4 +87,9 @@ function boardClick() {
  */
 function resetGame() {
 	gameBoard.resetGame()
+}
+
+function autoGame() {
+	gameBoard.resetGame()
+	gameBoard.startAutoGame()
 }

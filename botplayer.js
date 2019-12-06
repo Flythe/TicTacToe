@@ -21,12 +21,16 @@ class BotPlayer {
 	}
 
 	takeTurn() {
-		if (this.bot === 'human' || this.gameState.gameOver || this.gameState.error === true) {
+		if (this.isHuman() || this.gameState.gameHasEnded() || this.gameState.error === true) {
 			return
 		}
 
 		const [x, y] = this.botInstance().findMove(this.gameState)
 		
 		this.gamePiece.place(x, y)
-	}	
+	}
+
+	isHuman() {
+		return this.bot === 'human'
+	}
 }

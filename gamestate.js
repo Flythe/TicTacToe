@@ -120,4 +120,8 @@ class GameState {
 			this.errorText.remove()
 		}
 	}
+
+	gameHasEnded() {
+		return this.gameOver
+	}
 }

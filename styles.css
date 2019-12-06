@@ -24,7 +24,8 @@ canvas {
 
 .button-container {
 	display: flex;
-	justify-content: center
+	justify-content: center;
+	margin-bottom: 10px;
 }
 
 .button-container > * {

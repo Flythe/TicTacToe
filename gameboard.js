@@ -12,7 +12,8 @@ class Gameboard {
 
 		// Bot hooks directly into the gamestate and game pieces
 		// so it is able to place pieces onto the game board
-		this.botPlayer = new BotPlayer(this.gameState, this.gamePiece)
+		this.botPlayerA = new BotPlayer(this.gameState, this.gamePiece)
+		this.botPlayerB = new BotPlayer(this.gameState, this.gamePiece)
 	}
 
 	resetGame() {
@@ -21,8 +22,24 @@ class Gameboard {
 		this.gameState.reset()
 	}
 
+	startAutoGame() {
+		// Prevent auto game when one or both of the bots are human
+		if (this.botPlayerA.isHuman() || this.botPlayerB.isHuman()) {
+			return
+		}
+
+		// Have each bot take a turn
+		this.botPlayerA.takeTurn()
+		this.botPlayerB.takeTurn()
+
+		// If the game has not ended take another turn
+		if (!this.gameState.gameHasEnded()) {
+			this.startAutoGame()
+		}
+	}
+
 	boardClick() {
-		if (this.gameState.gameOver) {
+		if (this.gameState.gameHasEnded()) {
 			this.resetGame()
 
 			return
@@ -35,7 +52,8 @@ class Gameboard {
 
 		this.gamePiece.place(blockX, blockY)
 
-		this.botPlayer.takeTurn()
+		this.botPlayerA.takeTurn()
+		this.botPlayerB.takeTurn()
 	}
 
 	gameBoard() {
@@ -63,7 +81,11 @@ class Gameboard {
 		noStroke()
 	}
 
-	changeBotPlayer(botName) {
-		this.botPlayer.setBotInstance(botName)
+	changePlayerA(botName) {
+		this.botPlayerA.setBotInstance(botName)
+	}
+
+	changePlayerB(botName) {
+		this.botPlayerB.setBotInstance(botName)
 	}
 }
