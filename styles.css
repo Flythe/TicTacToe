@@ -1,0 +1,66 @@
+body {
+	background-image: url('images/retina_wood.png');
+
+	font: 20px monospace;
+	font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px 0 5px 0;
+}
+
+canvas {
+	border: 2px solid #333;
+	border-radius: 3px;
+}
+
+#container {
+	padding: 20px;
+	margin: 0 auto;
+	width: 450px;
+}
+
+.button-container {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center
+}
+
+.button-container > * {
+	margin: 0 5px;
+	color: #666;
+	font: 20px monospace;
+	font-weight: bold;
+}
+
+.button-container span {
+	line-height: 40px;
+	margin: 0 0 0 10px;
+}
+
+.button-container button, .button-container select {
+	border: 2px solid #666;
+	background: #fff;
+}
+
+.button-container button {
+	padding: 7px;
+}
+
+.button-container button:hover {
+	border-color: #000;
+	color: #000;
+	cursor: pointer;
+}
+
+.error-text {
+	position: absolute;
+	top: 255px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: red;
+	padding: 10px;
+	background: white;
+	border: 2px solid red;
+}
