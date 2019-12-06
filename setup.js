@@ -25,7 +25,7 @@ function setup() {
  * Create the game buttons
  */
 function addButtons() {
-	buttonContainer = createDiv().class('button-container').parent('container')
+	buttonContainer = createDiv().class('button-container')
 	button = createButton('Reset').parent(buttonContainer)
   	
   	button.mousePressed(resetGame)

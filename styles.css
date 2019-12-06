@@ -19,10 +19,10 @@ canvas {
 	padding: 20px;
 	margin: 0 auto;
 	width: 450px;
+	position: relative;
 }
 
 .button-container {
-	margin-top: 10px;
 	display: flex;
 	justify-content: center
 }
@@ -56,7 +56,7 @@ canvas {
 
 .error-text {
 	position: absolute;
-	top: 255px;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	color: red;

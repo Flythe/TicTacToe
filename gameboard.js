@@ -22,6 +22,12 @@ class Gameboard {
 	}
 
 	boardClick() {
+		if (this.gameState.gameOver) {
+			this.resetGame()
+
+			return
+		}
+
 		this.gameState.clearErrors()
 
 		const blockX = floor(mouseX / this.blockSize)
