@@ -6,6 +6,13 @@ class GameState {
 	gameOver = false
 	error = false
 
+	results = {
+		games: 0,
+		ties: 0,
+		player1: 0,
+		player2: 0
+	}
+
 	constructor(size) {
 		this.size = size
 		this.numRounds = Math.pow(this.size, 2)
@@ -28,6 +35,19 @@ class GameState {
 		this.gameOver = false
 
 		this.clearErrors()
+	}
+
+	wipeResults() {
+		this.results = {
+			games: 0,
+			ties: 0,
+			player1: 0,
+			player2: 0
+		}
+	}
+
+	getResults() {
+		return this.results
 	}
 
 	getState() {
@@ -106,10 +126,16 @@ class GameState {
 	}
 
 	endGame(playerWon) {
+		this.results.games++
+
 		if (playerWon !== undefined) {
+			this.results['player' + this.player]++
+
 			this.error = true
 			this.errorText = createSpan(`Player ${this.player} has won!`).class('error-text').parent('container')
 		} else {
+			this.results.ties++
+
 			this.error = true
 			this.errorText = createSpan('Tie!').class('error-text').parent('container')
 		}

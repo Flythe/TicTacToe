@@ -38,8 +38,8 @@ function addButtons() {
 function addBots() {
 	const container = createDiv().class('button-container')
 
-	addSelect('A', pickBotA, container)
-	addSelect('B', pickBotB, container)
+	addSelect('1', pickBotA, container)
+	addSelect('2', pickBotB, container)
 }
 
 function addSelect(player, callback, container) {
@@ -87,9 +87,18 @@ function boardClick() {
  */
 function resetGame() {
 	gameBoard.resetGame()
+	gameBoard.resetResults()
 }
 
 function autoGame() {
-	gameBoard.resetGame()
-	gameBoard.startAutoGame()
+	let i = 0
+
+	while (i < 100) {
+		gameBoard.resetGame()
+		gameBoard.startAutoGame()
+
+		i++
+	}
+
+	console.log(gameBoard.getResults())
 }

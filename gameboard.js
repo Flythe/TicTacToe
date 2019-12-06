@@ -22,6 +22,10 @@ class Gameboard {
 		this.gameState.reset()
 	}
 
+	resetResults() {
+		this.gameState.wipeResults()
+	}
+
 	startAutoGame() {
 		// Prevent auto game when one or both of the bots are human
 		if (this.botPlayerA.isHuman() || this.botPlayerB.isHuman()) {
@@ -36,6 +40,10 @@ class Gameboard {
 		if (!this.gameState.gameHasEnded()) {
 			this.startAutoGame()
 		}
+	}
+
+	getResults() {
+		return this.gameState.getResults()
 	}
 
 	boardClick() {
