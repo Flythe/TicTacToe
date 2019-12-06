@@ -2,7 +2,8 @@ class BotPlayer {
 	players = {
 		'Human': 'human',
 		'Sequential': 'sequentialBot',
-		'Random': 'randomBot'
+		'Random': 'randomBot',
+		'Neural network': 'neuralNetBot'
 	}
 
 	constructor(gameState, gamePiece) {

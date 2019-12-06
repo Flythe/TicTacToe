@@ -50,6 +50,7 @@ function addSelect(player, container) {
   	innerSel.option('Human')
   	innerSel.option('Sequential')
   	innerSel.option('Random')
+  	innerSel.option('Neural network')
 
   	innerSel.changed(pickBot)
 
