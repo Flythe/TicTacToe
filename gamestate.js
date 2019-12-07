@@ -1,6 +1,7 @@
 class GameState {
 	gameState = []
 
+	playerWon = 0
 	player = 1
 	round = 0
 	gameOver = false
@@ -30,6 +31,7 @@ class GameState {
 	reset() {
 		this.createGameGrid()
 
+		this.playerWon = 0
 		this.player = 1
 		this.round = 0
 		this.gameOver = false
@@ -52,6 +54,14 @@ class GameState {
 
 	getState() {
 		return this.gameState
+	}
+
+	getPlayer() {
+		return this.player
+	}
+
+	getWinningPlayer() {
+		return this.playerWon
 	}
 
 	progress(x, y) {
@@ -129,10 +139,12 @@ class GameState {
 		this.results.games++
 
 		if (playerWon !== undefined) {
-			this.results['player' + this.player]++
+			this.playerWon = playerWon
+
+			this.results['player' + playerWon]++
 
 			this.error = true
-			this.errorText = createSpan(`Player ${this.player} has won!`).class('error-text').parent('container')
+			this.errorText = createSpan(`Player ${playerWon} has won!`).class('error-text').parent('container')
 		} else {
 			this.results.ties++
 

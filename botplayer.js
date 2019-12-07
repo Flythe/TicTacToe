@@ -31,6 +31,12 @@ class BotPlayer {
 		this.gamePiece.place(x, y)
 	}
 
+	gameEnded() {
+		if (typeof this.botInstance().gameEnded === 'function') {
+			this.botInstance().gameEnded(this.gameState)
+		}		
+	}
+
 	isHuman() {
 		return this.bot === 'human'
 	}

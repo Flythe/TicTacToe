@@ -39,6 +39,10 @@ class Gameboard {
 		// If the game has not ended take another turn
 		if (!this.gameState.gameHasEnded()) {
 			this.startAutoGame()
+		} else {
+			// Call the bots that game has ended for any wrap-up
+			this.botPlayerA.gameEnded()
+			this.botPlayerB.gameEnded()
 		}
 	}
 
